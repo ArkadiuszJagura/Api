@@ -1,19 +1,17 @@
 package net.jagura.rest.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import net.jagura.rest.dto.ImgwDto;
-import net.jagura.rest.webclient.prognose.ImgwClient;
+import net.jagura.rest.model.ImgwDto;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
-@Slf4j
-@RequiredArgsConstructor
 public class ImgwService {
 
-    private final ImgwClient imgwClient;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public ImgwDto getSynop() {
-        return imgwClient.getSynopForStation("sniezka");
+        String response = restTemplate.getForObject("http://danepubliczne.imgw.pl/api/data/synop/station/sniezka",
+                String.class);
+        return null;
     }
 }
